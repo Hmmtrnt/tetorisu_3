@@ -12,6 +12,8 @@ public:
 	
 	// 初期化
 	void init();
+	// 二個目以降に必要な初期化
+	void initVar2();
 	// 終了処理
 	void end();
 	// 更新処理
@@ -20,14 +22,20 @@ public:
 	void draw();
 	// ミノ生成
 	void makeMino();
-	// ミノの動き
+	// ミノの保存
+	void saveMino();
+	// ミノの自由落下
 	void moveMino();
-	//ミノの操作
+	// ミノの固定
+	void fixMino();
+	// ミノの操作
 	void operateMino();
 	// 左の当たり判定
 	void hitLeft();
 	// 右の当たり判定
 	void hitRight();
+	// 底辺の当たり判定
+	void hitBottom();
 
 private:
 	// ミノの配列の受け取り
@@ -45,7 +53,8 @@ private:
 
 	// 判定にあたったかどうか
 	bool m_hitFlag;
-	int flag;
+	// 落ちていないミノがあるかどうか
+	bool m_noFallFlag;
 
 	// ステージのポインタ
 	Stage* m_pStage;
