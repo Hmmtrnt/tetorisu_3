@@ -123,8 +123,11 @@ void Mino::moveMino()
 		hitBottom();
 		if (!m_hitFlag)
 		{
-			m_downFlame = 60;
-			m_countY += DRAW_BLOCK_WIDTH;
+			if (!m_noFallFlag)
+			{
+				m_downFlame = 60;
+				m_countY += DRAW_BLOCK_WIDTH;
+			}
 		}
 	}
 	m_posY = (int)m_countY / DRAW_BLOCK_WIDTH;
