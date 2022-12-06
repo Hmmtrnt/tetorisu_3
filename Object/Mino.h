@@ -2,6 +2,8 @@
 #pragma once
 #include "common.h"
 
+class Stage;
+
 class Mino
 {
 public:
@@ -20,6 +22,8 @@ public:
 	void makeMino();
 	// ミノの動き
 	void moveMino();
+	//ミノの操作
+	void operateMino();
 	// 左の当たり判定
 	void hitLeft();
 	// 右の当たり判定
@@ -36,4 +40,10 @@ private:
 	float m_countY;
 	// ミノの落下速度
 	float m_speedY;
+
+	// 判定にあたったかどうか
+	bool m_hitFlag;
+
+	// ステージのポインタ
+	Stage* m_pStage;
 };

@@ -1,10 +1,12 @@
 #include "Mino.h"
+#include "Stage.h"
 
 Mino::Mino() :
 	m_posX(0),
 	m_posY(0),
 	m_countY(0.0f),
-	m_speedY(0.0f)
+	m_speedY(0.0f),
+	m_hitFlag(false)
 {
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
@@ -13,10 +15,12 @@ Mino::Mino() :
 			m_minoArray[y][x] = 0;
 		}
 	}
+	m_pStage = new Stage;
 }
 
 Mino::~Mino()
 {
+	delete m_pStage;
 }
 
 void Mino::init()
@@ -25,6 +29,7 @@ void Mino::init()
 	m_posY = 0;
 	m_countY = 0.0f;
 	m_speedY = 0.5f;
+	m_hitFlag = false;
 }
 
 void Mino::end()
@@ -78,10 +83,56 @@ void Mino::moveMino()
 	m_posY = (int)m_countY / DRAW_BLOCK_WIDTH;
 }
 
+// ¶‚Ì•Ç”»’è
 void Mino::hitLeft()
 {
+	m_hitFlag = false;
+	for (int y = 0; y < BLOCK_HEIGHT; y++)
+	{
+		for (int x = 0; x < BLOCK_WIDTH; x++)
+		{
+			if (m_minoArray[y][x] != 0)
+			{
+				if (m_pStage->m_stageArray[m_posY + y][m_posX + (x - 1)] != 0)
+				{
+					m_hitFlag = true;
+				}
+				// ƒ~ƒm‚ÌŠÔ‚É“ü‚èž‚Ü‚È‚¢‚æ‚¤‚É‚·‚é
+				else if ((int)(m_countY - (m_posY * DRAW_BLOCK_WIDTH)) > 0)
+				{
+					if (m_pStage->m_stageArray[m_posY + y][m_posX + (x - 1)] != 0)
+					{
+						m_hitFlag = true;
+					}
+				}
+			}
+		}
+	}
 }
 
+// ‰E‚Ì•Ç”»’è
 void Mino::hitRight()
 {
+	m_hitFlag = false;
+	for (int y = 0; y < BLOCK_HEIGHT; y++)
+	{
+		for (int x = 0; x < BLOCK_WIDTH; x++)
+		{
+			if (m_minoArray[y][x] != 0)
+			{
+				if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
+				{
+					m_hitFlag = true;
+				}
+				// ƒ~ƒm‚ÌŠÔ‚É“ü‚èž‚Ü‚È‚¢‚æ‚¤‚É‚·‚é
+				else if ((int)(m_countY - (m_posY * DRAW_BLOCK_WIDTH)) > 0)
+				{
+					if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
+					{
+						m_hitFlag = true;
+					}
+				}
+			}
+		}
+	}
 }
