@@ -1,12 +1,14 @@
 #include "Mino.h"
 #include "Stage.h"
+#include "Pad.h"
 
 Mino::Mino() :
 	m_posX(0),
 	m_posY(0),
 	m_countY(0.0f),
 	m_speedY(0.0f),
-	m_hitFlag(false)
+	m_hitFlag(false),
+	flag(0)
 {
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
@@ -30,6 +32,7 @@ void Mino::init()
 	m_countY = 0.0f;
 	m_speedY = 0.5f;
 	m_hitFlag = false;
+	flag = 0;
 }
 
 void Mino::end()
@@ -39,6 +42,11 @@ void Mino::end()
 void Mino::update()
 {
 	moveMino();
+	operateMino();
+	if (m_posY >= 17)
+	{
+		m_speedY = 0;
+	}
 }
 
 void Mino::draw()
@@ -81,6 +89,27 @@ void Mino::moveMino()
 {
 	m_countY += m_speedY;
 	m_posY = (int)m_countY / DRAW_BLOCK_WIDTH;
+}
+
+// É~ÉmÇÃëÄçÏ
+void Mino::operateMino()
+{
+	if (Pad::isTrigger(PAD_INPUT_LEFT) == 1)
+	{
+		hitLeft();
+		if (!m_hitFlag)
+		{
+			m_posX--;
+		}
+	}
+	if (Pad::isTrigger(PAD_INPUT_RIGHT) == 1)
+	{
+		hitRight();
+		if (!m_hitFlag)
+		{
+			m_posX++;
+		}
+	}
 }
 
 // ç∂ÇÃï«îªíË

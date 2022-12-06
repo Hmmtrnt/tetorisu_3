@@ -43,6 +43,7 @@ private:
 
 	// 判定にあたったかどうか
 	bool m_hitFlag;
+	int flag;
 
 	// ステージのポインタ
 	Stage* m_pStage;

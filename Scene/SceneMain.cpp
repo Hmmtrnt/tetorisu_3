@@ -20,22 +20,22 @@ SceneMain::~SceneMain()
 // ‰Šú‰»
 void SceneMain::init()
 {
-	m_pMino->init();
 	m_pStage->init();
+	m_pMino->init();
 }
 
 // I—¹ˆ—
 void SceneMain::end()
 {
-	m_pMino->end();
 	m_pStage->end();
+	m_pMino->end();
 }
 
 // XVˆ—
 SceneBase* SceneMain::update()
 {
-	m_pMino->update();
 	m_pStage->update();
+	m_pMino->update();
 	if (Pad::isTrigger(PAD_INPUT_2))
 	{
 		return (new SceneResult);
