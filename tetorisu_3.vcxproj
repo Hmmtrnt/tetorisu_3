@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\Mino.cpp" />
     <ClCompile Include="Object\Stage.cpp" />
     <ClCompile Include="Util\Pad.cpp" />
     <ClCompile Include="Scene\SceneBase.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="common.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="Object\Mino.h" />
     <ClInclude Include="Object\Stage.h" />
     <ClInclude Include="Util\Pad.h" />
     <ClInclude Include="Scene\SceneBase.h" />
