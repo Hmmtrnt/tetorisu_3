@@ -25,7 +25,7 @@ namespace kMino
 
 	// ƒ~ƒm‚ÌŒ`
 	// Oƒ~ƒm
-	constexpr int kMino[BLOCK_HEIGHT][BLOCK_WIDTH] = {
+	constexpr int kMinos[BLOCK_HEIGHT][BLOCK_WIDTH] = {
 		{0,0,0,0},
 		{0,1,1,0},
 		{0,1,1,0},

@@ -1,5 +1,7 @@
 // ステージ
 #pragma once
+#include "common.h"
+
 class Stage
 {
 public:
@@ -16,6 +18,8 @@ public:
 	void draw();
 
 private:
+	// ステージの配列
+	int m_stageArray[STAGE_HEIGHT][STAGE_WIDTH];
 	// 背景のハンドル
 	int m_backHandle;
 };

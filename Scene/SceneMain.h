@@ -2,6 +2,8 @@
 #pragma once
 #include "SceneBase.h"
 
+class Mino;
+class Stage;
 
 class SceneMain : public SceneBase
 {
@@ -15,5 +17,6 @@ public:
 	virtual void draw();			// •`‰æˆ—
 
 private:
-	
+	Mino* m_pMino;
+	Stage* m_pStage;
 };
