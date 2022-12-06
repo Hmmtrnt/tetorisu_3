@@ -5,6 +5,7 @@
 Mino::Mino() :
 	m_posX(0),
 	m_posY(0),
+	m_downFlame(0),
 	m_countY(0.0f),
 	m_speedY(0.0f),
 	m_hitFlag(false),
@@ -29,38 +30,34 @@ void Mino::init()
 {
 	m_posX = 4;
 	m_posY = 0;
+	m_downFlame = 60;
 	m_countY = 0.0f;
 	m_speedY = 0.5f;
 	m_hitFlag = false;
 	flag = 0;
+	m_pStage->init();
 }
 
 void Mino::end()
 {
+	m_pStage->end();
 }
 
 void Mino::update()
 {
 	moveMino();
 	operateMino();
-	if (m_posY >= 17)
-	{
-		m_speedY = 0;
-	}
+	m_pStage->update();
 }
 
 void Mino::draw()
 {
 	// ---------------------------------------------
-	// Šm”F—p•`‰æ
-	// ---------------------------------------------
-	DrawFormatString(300, 0, color::kColor_Black, "m_posX = %d", m_posX);
-	DrawFormatString(300, 20, color::kColor_Black, "m_posY = %d", m_posY);
-	DrawFormatString(300, 40, color::kColor_Black, "m_countY = %d", m_countY);
-
-	// ---------------------------------------------
 	// ƒQ[ƒ€•`‰æ
 	// ---------------------------------------------
+	// ƒXƒe[ƒW•`‰æ
+	m_pStage->draw();
+
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
 		for (int x = 0; x < BLOCK_WIDTH; x++)
@@ -72,6 +69,13 @@ void Mino::draw()
 			}
 		}
 	}
+
+	// ---------------------------------------------
+	// Šm”F—p•`‰æ
+	// ---------------------------------------------
+	DrawFormatString(300, 0, color::kColor_Black, "m_posX = %d", m_posX);
+	DrawFormatString(300, 20, color::kColor_Black, "m_posY = %d", m_posY);
+	DrawFormatString(300, 40, color::kColor_Black, "m_countY = %d", m_countY);
 }
 
 void Mino::makeMino()
@@ -87,13 +91,24 @@ void Mino::makeMino()
 
 void Mino::moveMino()
 {
-	m_countY += m_speedY;
+	m_downFlame--;
+	if (m_posY >= 17)
+	{
+		return;
+	}
+	if (m_downFlame <= 0)
+	{
+		m_downFlame = 60;
+		m_countY += DRAW_BLOCK_WIDTH;
+	}
+	//m_countY += m_speedY;
 	m_posY = (int)m_countY / DRAW_BLOCK_WIDTH;
 }
 
 // ƒ~ƒm‚Ì‘€ì
 void Mino::operateMino()
 {
+	
 	if (Pad::isTrigger(PAD_INPUT_LEFT) == 1)
 	{
 		hitLeft();
@@ -109,6 +124,14 @@ void Mino::operateMino()
 		{
 			m_posX++;
 		}
+	}
+	if (m_posY >= 17)
+	{
+		return;
+	}
+	if (Pad::isPress(PAD_INPUT_DOWN) == 1)
+	{
+		m_countY += DRAW_BLOCK_WIDTH;
 	}
 }
 
@@ -126,14 +149,6 @@ void Mino::hitLeft()
 				{
 					m_hitFlag = true;
 				}
-				// ƒ~ƒm‚ÌŠÔ‚É“ü‚èž‚Ü‚È‚¢‚æ‚¤‚É‚·‚é
-				else if ((int)(m_countY - (m_posY * DRAW_BLOCK_WIDTH)) > 0)
-				{
-					if (m_pStage->m_stageArray[m_posY + y][m_posX + (x - 1)] != 0)
-					{
-						m_hitFlag = true;
-					}
-				}
 			}
 		}
 	}
@@ -143,6 +158,27 @@ void Mino::hitLeft()
 void Mino::hitRight()
 {
 	m_hitFlag = false;
+	//for (int y = 0; y < BLOCK_HEIGHT; y++)
+	//{
+	//	for (int x = 0; x < BLOCK_WIDTH; x++)
+	//	{
+	//		if (m_minoArray[y][x] != 0)
+	//		{
+	//			if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
+	//			{
+	//				m_hitFlag = true;
+	//			}
+	//			// ƒ~ƒm‚ÌŠÔ‚É“ü‚èž‚Ü‚È‚¢‚æ‚¤‚É‚·‚é
+	//			else if ((int)(m_countY - (m_posY * DRAW_BLOCK_WIDTH)) > 0)
+	//			{
+	//				if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
+	//				{
+	//					m_hitFlag = true;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
 		for (int x = 0; x < BLOCK_WIDTH; x++)
@@ -152,14 +188,6 @@ void Mino::hitRight()
 				if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
 				{
 					m_hitFlag = true;
-				}
-				// ƒ~ƒm‚ÌŠÔ‚É“ü‚èž‚Ü‚È‚¢‚æ‚¤‚É‚·‚é
-				else if ((int)(m_countY - (m_posY * DRAW_BLOCK_WIDTH)) > 0)
-				{
-					if (m_pStage->m_stageArray[m_posY + y][m_posX + (x + 1)] != 0)
-					{
-						m_hitFlag = true;
-					}
 				}
 			}
 		}

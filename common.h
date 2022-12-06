@@ -31,6 +31,13 @@ namespace kMino
 		{0,1,1,0},
 		{0,0,0,0}
 	};
+	// テスト用ミノ
+	/*constexpr int kMinos[BLOCK_HEIGHT][BLOCK_WIDTH] = {
+		{1,0,0,0},
+		{0,0,0,0},
+		{0,0,0,0},
+		{0,0,0,0}
+	};*/
 }
 
 namespace color

@@ -35,6 +35,8 @@ private:
 	// ミノの座標
 	int m_posX;
 	int m_posY;
+	// ミノの落ちるフレーム
+	int m_downFlame;
 
 	// 表示用
 	float m_countY;
