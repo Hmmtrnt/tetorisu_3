@@ -132,6 +132,12 @@ void Mino::moveMino()
 
 void Mino::fixMino()
 {
+	hitBottom();
+	if (!m_hitFlag)
+	{
+		saveMino();
+		initVar2();
+	}
 }
 
 // ƒ~ƒm‚Ì‘€ì
