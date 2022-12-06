@@ -20,6 +20,8 @@ public:
 	void update();
 	// 描画
 	void draw();
+	// ゲームオーバー処理
+	void gameOver();
 	// ミノ生成
 	void makeMino();
 	// ミノの保存
@@ -36,6 +38,8 @@ public:
 	void hitRight();
 	// 底辺の当たり判定
 	void hitBottom();
+	// 上辺の当たり判定
+	void hitUp();
 
 private:
 	// ミノの配列の受け取り

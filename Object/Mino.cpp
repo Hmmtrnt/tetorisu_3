@@ -86,6 +86,10 @@ void Mino::draw()
 	DrawFormatString(300, 40, color::kColor_Black, "m_countY = %d", m_countY);
 }
 
+void Mino::gameOver()
+{
+}
+
 // ƒ~ƒm‚Ì“®‚«
 void Mino::makeMino()
 {
@@ -222,6 +226,24 @@ void Mino::hitBottom()
 			if (m_minoArray[y][x] != 0)
 			{
 				if (m_pStage->m_stageArray[m_posY + (y + 1)][m_posX + x] != 0)
+				{
+					m_hitFlag = true;
+				}
+			}
+		}
+	}
+}
+
+void Mino::hitUp()
+{
+	m_hitFlag = false;
+	for (int y = 0; y < BLOCK_HEIGHT; y++)
+	{
+		for (int x = 0; x < BLOCK_WIDTH; x++)
+		{
+			if (m_minoArray[y][x] != 0)
+			{
+				if (m_pStage->m_stageArray[m_posY + y][m_posX + x] != 0)
 				{
 					m_hitFlag = true;
 				}
