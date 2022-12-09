@@ -12,7 +12,8 @@ Mino::Mino() :
 	m_speedY(0.0f),
 	m_hitFlag(false),
 	m_noFallFlag(false),
-	m_gameOver(false)
+	m_gameOverFlag(false),
+	m_clearMinoFlag(false)
 {
 	for (int i = 0; i < 20; i++)
 	{
@@ -43,7 +44,8 @@ void Mino::init()
 	m_speedY = 0.5f;
 	m_hitFlag = false;
 	m_noFallFlag = true;
-	m_gameOver = false;
+	m_gameOverFlag = false;
+	m_clearMinoFlag = false;
 	m_pStage->init();
 }
 
@@ -126,7 +128,7 @@ void Mino::draw()
 			}
 		}
 	}
-	if (m_gameOver)
+	if (m_gameOverFlag)
 	{
 		DrawString(300, 60, "GAME OVER", GetColor(0, 0, 0));
 	}
@@ -144,7 +146,7 @@ void Mino::gameOver()
 	hitTop();
 	if (m_hitFlag)
 	{
-		m_gameOver = true;
+		m_gameOverFlag = true;
 	}
 }
 
@@ -244,7 +246,25 @@ void Mino::breakMino()
 {
 	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
 	{
+		m_lineMino[i] = 0;
+	}
+	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
+	{
+		for (int j = 0; j < STAGE_WIDTH - 1; j++)
+		{
+			if (m_pStage->m_stageArray[i][j] == 0)
+			{
+				m_lineMino[i] = 1;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
+	{
+		if (m_lineMino[i] == 0)
+		{
 
+		}
 	}
 }
 

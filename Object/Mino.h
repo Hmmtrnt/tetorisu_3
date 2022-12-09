@@ -44,7 +44,7 @@ public:
 	void hitTop();
 
 	// ゲームオーバー情報取得
-	bool getGameOver() { return m_gameOver; }
+	bool getGameOver() { return m_gameOverFlag; }
 
 private:
 	// ミノの配列の受け取り
@@ -71,7 +71,9 @@ private:
 	// 落ちていないミノがあるかどうか
 	bool m_noFallFlag;
 	// ゲームオーバー
-	bool m_gameOver;
+	bool m_gameOverFlag;
+	// 列のミノが消えたかどうか
+	bool m_clearMinoFlag;
 
 	// ステージのポインタ
 	Stage* m_pStage;
