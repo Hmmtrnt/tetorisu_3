@@ -205,7 +205,11 @@ void Mino::fixMino()
 	if (m_hitFlag)
 	{
 		saveMino();
-		initVar2();
+		breakMino();
+		if (!m_clearMinoFlag)
+		{
+			initVar2();
+		}
 	}
 }
 
@@ -263,7 +267,8 @@ void Mino::breakMino()
 	{
 		if (m_lineMino[i] == 0)
 		{
-
+			m_clearMinoFlag = true;
+			break;
 		}
 	}
 }

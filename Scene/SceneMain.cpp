@@ -36,10 +36,10 @@ SceneBase* SceneMain::update()
 	{
 		return (new SceneResult);
 	}
-	if (Pad::isTrigger(PAD_INPUT_2))
+	/*if (Pad::isTrigger(PAD_INPUT_2))
 	{
 		return (new SceneResult);
-	}
+	}*/
 	return this;
 }
 
