@@ -8,13 +8,11 @@
 SceneMain::SceneMain()
 {
 	m_pMino = new Mino;
-	m_pStage = new Stage;
 }
 
 SceneMain::~SceneMain()
 {
 	delete m_pMino;
-	delete m_pStage;
 }
 
 // ‰Šú‰»
@@ -33,6 +31,11 @@ void SceneMain::end()
 SceneBase* SceneMain::update()
 {
 	m_pMino->update();
+	m_pMino->hitTop();
+	if (m_pMino->getGameOver())
+	{
+		return (new SceneResult);
+	}
 	if (Pad::isTrigger(PAD_INPUT_2))
 	{
 		return (new SceneResult);

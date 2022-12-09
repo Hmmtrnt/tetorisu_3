@@ -41,6 +41,9 @@ public:
 	// 上辺の当たり判定
 	void hitTop();
 
+	// ゲームオーバー情報取得
+	bool getGameOver() { return m_gameOver; }
+
 private:
 	// ミノの配列の受け取り
 	int m_minoArray[BLOCK_HEIGHT][BLOCK_WIDTH];

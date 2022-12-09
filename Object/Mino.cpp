@@ -31,7 +31,7 @@ Mino::~Mino()
 void Mino::init()
 {
 	m_posX = 4;
-	m_posY = -1;
+	m_posY = 0;
 	m_downFlame = 60;
 	m_hitBottomTime = 120;
 	m_countY = 0.0f;
@@ -45,7 +45,7 @@ void Mino::init()
 void Mino::initVar2()
 {
 	m_posX = 4;
-	m_posY = -1;
+	m_posY = 0;
 	//m_hitBottomTime = 120;
 	m_countY = 0.0f;
 	m_noFallFlag = true;
@@ -58,6 +58,7 @@ void Mino::end()
 
 void Mino::update()
 {
+	
 	if (m_noFallFlag)
 	{
 		makeMino();
@@ -66,11 +67,8 @@ void Mino::update()
 	operateMino();
 	m_pStage->update();
 	fixMino();
-	/*gameOver();
-	if (m_gameOver)
-	{
-		DrawString(300, 60, "GAME OVER", GetColor(0, 0, 0));
-	}*/
+	gameOver();
+	
 }
 
 void Mino::draw()
@@ -93,6 +91,10 @@ void Mino::draw()
 			}
 		}
 	}
+	if (m_gameOver)
+	{
+		DrawString(300, 60, "GAME OVER", GetColor(0, 0, 0));
+	}
 
 	// ---------------------------------------------
 	// Šm”F—p•`‰æ
@@ -107,7 +109,7 @@ void Mino::gameOver()
 	hitTop();
 	if (m_hitFlag)
 	{
-		m_gameOver = 1;
+		m_gameOver = true;
 	}
 }
 
