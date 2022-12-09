@@ -32,6 +32,8 @@ public:
 	void fixMino();
 	// ミノの操作
 	void operateMino();
+	// ミノの消去
+	void breakMino();
 	// 左の当たり判定
 	void hitLeft();
 	// 右の当たり判定
@@ -54,6 +56,10 @@ private:
 	int m_downFlame;
 	// ミノが底辺に落ちた時の時間
 	int m_hitBottomTime;
+	// ミノの種類
+	int m_id;
+	// ミノがそろった列
+	int m_lineMino[20];
 
 	// 表示用
 	float m_countY;

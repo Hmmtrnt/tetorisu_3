@@ -29,7 +29,7 @@ namespace kMino
 
 	// É~ÉmÇÃå`
 	constexpr int kMinos[BLOCK_HEIGHT * BLOCK_TYPE][BLOCK_WIDTH * BLOCK_ROTATE_TYPE] = {
-		// OÉ~Ém
+		// OÉ~Ém	ÅÀÇ±ÇÍà»ç~ÇÕâÒì]ÇµÇΩÉ~Ém
 		{0,0,0,0,	0,0,0,0,	0,0,0,0,	0,0,0,0},
 		{0,1,1,0,	0,1,1,0,	0,1,1,0,	0,1,1,0},
 		{0,1,1,0,	0,1,1,0,	0,1,1,0,	0,1,1,0},
@@ -76,6 +76,15 @@ namespace kMino
 
 namespace color
 {
-	const int kColor_Red = GetColor(255, 0, 0);		// ê‘
-	const int kColor_Black = GetColor(0, 0, 0);		// çï
+	// É~Ém
+	const int kColor_Yellow = GetColor(255, 255, 0);	// â©O
+	const int kColor_LightBlue = GetColor(0, 0, 120);	// êÖI
+	const int kColor_Green = GetColor(0, 200, 0);		// óŒS
+	const int kColor_Red = GetColor(255, 0, 0);			// ê‘Z
+	const int kColor_Blue = GetColor(0, 0, 255);		// ê¬J
+	const int kColor_Orange = GetColor(255, 120, 0);	// ûÚL
+	const int kColor_Purple = GetColor(255, 0, 255);	// éáT
+
+	// ÉXÉeÅ[ÉW
+	const int kColor_Black = GetColor(0, 0, 0);			// çï
 }

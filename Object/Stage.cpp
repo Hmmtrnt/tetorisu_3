@@ -53,7 +53,37 @@ void Stage::draw()
 			if (m_stageArray[y][x] == 1)
 			{
 				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_Yellow, "Å°");
+			}
+			if (m_stageArray[y][x] == 2)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_LightBlue, "Å°");
+			}
+			if (m_stageArray[y][x] == 3)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_Green, "Å°");
+			}
+			if (m_stageArray[y][x] == 4)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
 								 y * DRAW_BLOCK_WIDTH, color::kColor_Red, "Å°");
+			}
+			if (m_stageArray[y][x] == 5)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_Blue, "Å°");
+			}
+			if (m_stageArray[y][x] == 6)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_Orange, "Å°");
+			}
+			if (m_stageArray[y][x] == 7)
+			{
+				DrawFormatString(x * DRAW_BLOCK_WIDTH,
+								 y * DRAW_BLOCK_WIDTH, color::kColor_Purple, "Å°");
 			}
 			else if (m_stageArray[y][x] == 9)
 			{

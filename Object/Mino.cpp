@@ -7,12 +7,17 @@ Mino::Mino() :
 	m_posY(0),
 	m_downFlame(0),
 	m_hitBottomTime(0),
+	m_id(0),
 	m_countY(0.0f),
 	m_speedY(0.0f),
 	m_hitFlag(false),
 	m_noFallFlag(false),
 	m_gameOver(false)
 {
+	for (int i = 0; i < 20; i++)
+	{
+		m_lineMino[i] = 0;
+	}
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
 		for (int x = 0; x < BLOCK_WIDTH; x++)
@@ -87,7 +92,37 @@ void Mino::draw()
 			if (m_minoArray[y][x] == 1)
 			{
 				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH, 
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Yellow, "¡");
+			}
+			if (m_minoArray[y][x] == 2) 
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_LightBlue, "¡");
+			}
+			if (m_minoArray[y][x] == 3)
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Green, "¡");
+			}
+			if (m_minoArray[y][x] == 4)
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
 								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Red, "¡");
+			}
+			if (m_minoArray[y][x] == 5)
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Blue, "¡");
+			}
+			if (m_minoArray[y][x] == 6)
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Orange, "¡");
+			}
+			if (m_minoArray[y][x] == 7)
+			{
+				DrawFormatString(m_posX * DRAW_BLOCK_WIDTH + x * DRAW_BLOCK_WIDTH,
+								 (int)m_countY + y * DRAW_BLOCK_WIDTH, color::kColor_Purple, "¡");
 			}
 		}
 	}
@@ -118,11 +153,12 @@ void Mino::makeMino()
 {
 	if (m_noFallFlag)
 	{
+		m_id = (rand() % BLOCK_TYPE);
 		for (int y = 0; y < BLOCK_HEIGHT; y++)
 		{
 			for (int x = 0; x < BLOCK_WIDTH; x++)
 			{
-				m_minoArray[y][x] = kMino::kMinos[y][x];
+				m_minoArray[y][x] = kMino::kMinos[(m_id * BLOCK_HEIGHT) + y][x];
 			}
 		}
 		m_noFallFlag = false;
@@ -202,6 +238,14 @@ void Mino::operateMino()
 		}
 	}
 	
+}
+
+void Mino::breakMino()
+{
+	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
+	{
+
+	}
 }
 
 // ¶‚Ì•Ç”»’è
