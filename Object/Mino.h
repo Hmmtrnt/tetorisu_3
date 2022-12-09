@@ -39,7 +39,7 @@ public:
 	// 底辺の当たり判定
 	void hitBottom();
 	// 上辺の当たり判定
-	void hitUp();
+	void hitTop();
 
 private:
 	// ミノの配列の受け取り
@@ -49,6 +49,8 @@ private:
 	int m_posY;
 	// ミノの落ちるフレーム
 	int m_downFlame;
+	// ミノが底辺に落ちた時の時間
+	int m_hitBottomTime;
 
 	// 表示用
 	float m_countY;
@@ -59,6 +61,8 @@ private:
 	bool m_hitFlag;
 	// 落ちていないミノがあるかどうか
 	bool m_noFallFlag;
+	// ゲームオーバー
+	bool m_gameOver;
 
 	// ステージのポインタ
 	Stage* m_pStage;
