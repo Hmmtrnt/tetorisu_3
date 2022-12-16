@@ -14,7 +14,7 @@
 #define STAGE_HEIGHT 21
 #define STAGE_WIDTH 12
 
-// •`‰æ‚·‚éƒ~ƒm“®Œ‚Ì•
+// •`‰æ‚·‚éƒ~ƒm“¯m‚Ì•
 #define DRAW_BLOCK_WIDTH 20
 
 namespace kMino
