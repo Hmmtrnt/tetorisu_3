@@ -128,10 +128,10 @@ void Mino::draw()
 			}
 		}
 	}
-	if (m_gameOverFlag)
+	/*if (m_gameOverFlag)
 	{
 		DrawString(300, 60, "GAME OVER", GetColor(0, 0, 0));
-	}
+	}*/
 
 	// ---------------------------------------------
 	// Šm”F—p•`‰æ
