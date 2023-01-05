@@ -32,7 +32,9 @@ public:
 	void fixMino();
 	// ミノの操作
 	void operateMino();
-	// ミノの消去
+	// ミノを消去する行のサーチ
+	void searchMino();
+	// ミノを消去
 	void breakMino();
 	// 左の当たり判定
 	void hitLeft();
@@ -56,10 +58,12 @@ private:
 	int m_downFlame;
 	// ミノが底辺に落ちた時の時間
 	int m_hitBottomTime;
+	// ミノ
+	int breakCount;
 	// ミノの種類
 	int m_id;
 	// ミノがそろった列
-	int m_lineMino[20];
+	int m_lineMino[STAGE_HEIGHT - 1];
 
 	// 表示用
 	float m_countY;
@@ -68,6 +72,8 @@ private:
 
 	// 判定にあたったかどうか
 	bool m_hitFlag;
+	// ゲームオーバー判定に当たったかどうか
+	bool m_gameOverHitFlag;
 	// 落ちていないミノがあるかどうか
 	bool m_noFallFlag;
 	// ゲームオーバー

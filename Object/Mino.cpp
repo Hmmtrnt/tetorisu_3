@@ -7,15 +7,17 @@ Mino::Mino() :
 	m_posY(0),
 	m_downFlame(0),
 	m_hitBottomTime(0),
+	breakCount(0),
 	m_id(0),
 	m_countY(0.0f),
 	m_speedY(0.0f),
 	m_hitFlag(false),
+	m_gameOverHitFlag(false),
 	m_noFallFlag(false),
 	m_gameOverFlag(false),
 	m_clearMinoFlag(false)
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
 	{
 		m_lineMino[i] = 0;
 	}
@@ -40,9 +42,11 @@ void Mino::init()
 	m_posY = 0;
 	m_downFlame = 60;
 	m_hitBottomTime = 120;
+	breakCount = 0;
 	m_countY = 0.0f;
 	m_speedY = 0.5f;
 	m_hitFlag = false;
+	m_gameOverHitFlag = false;
 	m_noFallFlag = true;
 	m_gameOverFlag = false;
 	m_clearMinoFlag = false;
@@ -53,6 +57,7 @@ void Mino::initVar2()
 {
 	m_posX = 4;
 	m_posY = 0;
+	//breakCount = 0;
 	//m_hitBottomTime = 120;
 	m_countY = 0.0f;
 	m_noFallFlag = true;
@@ -65,16 +70,24 @@ void Mino::end()
 
 void Mino::update()
 {
-	
-	if (m_noFallFlag)
+	if (!m_clearMinoFlag)
 	{
-		makeMino();
+		if (m_noFallFlag)
+		{
+			makeMino();
+		}
+		moveMino();
+		operateMino();
+		m_pStage->update();
+		fixMino();
+		gameOver();
 	}
-	moveMino();
-	operateMino();
-	m_pStage->update();
-	fixMino();
-	gameOver();
+	else
+	{
+		breakMino();
+		m_pStage->draw();
+	}
+	
 	
 }
 
@@ -128,10 +141,6 @@ void Mino::draw()
 			}
 		}
 	}
-	/*if (m_gameOverFlag)
-	{
-		DrawString(300, 60, "GAME OVER", GetColor(0, 0, 0));
-	}*/
 
 	// ---------------------------------------------
 	// 確認用描画
@@ -143,8 +152,8 @@ void Mino::draw()
 
 void Mino::gameOver()
 {
-	hitTop();
-	if (m_hitFlag)
+	//hitTop();
+	if (m_gameOverHitFlag)
 	{
 		m_gameOverFlag = true;
 	}
@@ -205,11 +214,16 @@ void Mino::fixMino()
 	if (m_hitFlag)
 	{
 		saveMino();
-		breakMino();
+		searchMino();
 		if (!m_clearMinoFlag)
 		{
 			initVar2();
 		}
+		/*else
+		{
+			breakMino();
+			m_clearMinoFlag = false;
+		}*/
 	}
 }
 
@@ -246,15 +260,19 @@ void Mino::operateMino()
 	
 }
 
-void Mino::breakMino()
+// 消去する列の確認
+// m_lineMino[i] = 1; 確認済
+// m_lineMino[i] = 0; 消去するべき列
+void Mino::searchMino()
 {
 	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
 	{
 		m_lineMino[i] = 0;
 	}
+	// 揃っている列の捜索
 	for (int i = 0; i < STAGE_HEIGHT - 1; i++)
 	{
-		for (int j = 0; j < STAGE_WIDTH - 1; j++)
+		for (int j = 1; j < STAGE_WIDTH - 1; j++)
 		{
 			if (m_pStage->m_stageArray[i][j] == 0)
 			{
@@ -268,8 +286,54 @@ void Mino::breakMino()
 		if (m_lineMino[i] == 0)
 		{
 			m_clearMinoFlag = true;
+			/*if (m_clearMinoFlag)
+			{
+				printfDx("成功");
+			}*/
 			break;
 		}
+	}
+}
+
+// ミノの消去
+void Mino::breakMino()
+{
+	int remain_line_point[20] = { 0 };
+	int remain_line_index = 0;
+
+	if (breakCount < 10)
+	{
+		for (int i = 0; i < STAGE_HEIGHT - 1; i++)
+		{
+			if (m_lineMino[i] == 0)
+			{
+				m_pStage->m_stageArray[i][breakCount] = 0;
+			}
+		}
+		breakCount++;
+	}
+	else
+	{
+		for (int i = STAGE_HEIGHT - 2; i >= 0; i--)
+		{
+			if (m_lineMino[i] != 0)
+			{
+				remain_line_point[remain_line_index] = i;
+				remain_line_index++;
+			}
+		}
+		remain_line_index = 0;
+		for (int i = STAGE_HEIGHT - 1; i >= 0; i--)
+		{
+			for (int j = 1; j < STAGE_WIDTH - 1; j++)
+			{
+				m_pStage->m_stageArray[i][j] = m_pStage->m_stageArray[remain_line_point[remain_line_index]][j];
+			}
+			remain_line_index++;
+		}
+		m_clearMinoFlag = false;
+		breakCount = 0;
+		initVar2();
 	}
 }
 
@@ -338,7 +402,7 @@ void Mino::hitBottom()
 
 void Mino::hitTop()
 {
-	m_hitFlag = false;
+	/*m_gameOverHitFlag = false;*/
 	for (int y = 0; y < BLOCK_HEIGHT; y++)
 	{
 		for (int x = 0; x < BLOCK_WIDTH; x++)
@@ -347,7 +411,7 @@ void Mino::hitTop()
 			{
 				if (m_pStage->m_stageArray[m_posY + y][m_posX + x] != 0)
 				{
-					m_hitFlag = true;
+					m_gameOverHitFlag = true;
 				}
 			}
 		}
